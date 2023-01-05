@@ -6,3 +6,36 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.sidebar {
+  height: 100%;
+  position: fixed;
+  width: 220px;
+  background-color: #444655;
+}
+.link {
+  text-decoration: none;
+  color: #fff;
+}
+.nav-link {
+  font-size: 16px;
+}
+.nav-logout {
+  padding-left: 32px;
+}
+.nav-logout:hover {
+  cursor: pointer;
+}
+
+li {
+  list-style-type: none;
+}
+
+.content {
+  margin-left: 240px;
+  padding: 20px 20px 20px 0;
+
+}
+.profile-icon {
+  border-radius: 50%;
+}
