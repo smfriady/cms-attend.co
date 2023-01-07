@@ -1,10 +1,4 @@
-import {
-  Table,
-  Card,
-  Form,
-  Button,
-  Pagination,
-} from "react-bootstrap";
+import { Table, Card, Form, Button, Pagination } from "react-bootstrap";
 import { Funnel, Search, Eye, Pencil, Trash3 } from "react-bootstrap-icons";
 
 const TableEmployees = () => {
@@ -43,8 +37,8 @@ const TableEmployees = () => {
                 <th>No</th>
                 <th>Full Name</th>
                 <th>Email</th>
-                <th>Education</th>
                 <th>Department</th>
+                <th>Role</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -53,8 +47,8 @@ const TableEmployees = () => {
                 <td>1</td>
                 <td>Muhammad Januar</td>
                 <td>januaricks@gmail.com</td>
-                <td>Bachelor Degree</td>
                 <td>Engineer</td>
+                <td>Jr. Engineer</td>
                 <td>
                   <div className="d-flex gap-2">
                     <Button size="sm" variant="outline-primary">
@@ -73,8 +67,8 @@ const TableEmployees = () => {
                 <td>2</td>
                 <td>Muhammad Januar</td>
                 <td>januaricks@gmail.com</td>
-                <td>Bachelor Degree</td>
                 <td>Engineer</td>
+                <td>Sr. Engineer</td>
                 <td>
                   <div className="d-flex gap-2">
                     <Button size="sm" variant="outline-primary">
@@ -93,8 +87,8 @@ const TableEmployees = () => {
                 <td>3</td>
                 <td>Muhammad Januar</td>
                 <td>januaricks@gmail.com</td>
-                <td>Master Degree</td>
-                <td>Engineer</td>
+                <td>Marketing</td>
+                <td>Marketing Suvervisor</td>
                 <td>
                   <div className="d-flex gap-2">
                     <Button size="sm" variant="outline-primary">
@@ -113,8 +107,8 @@ const TableEmployees = () => {
                 <td>4</td>
                 <td>Muhammad Januar</td>
                 <td>januaricks@gmail.com</td>
-                <td>Master Degree</td>
-                <td>Engineer</td>
+                <td>Management</td>
+                <td>Branch Manager</td>
                 <td>
                   <div className="d-flex gap-2">
                     <Button size="sm" variant="outline-primary">
@@ -133,8 +127,8 @@ const TableEmployees = () => {
                 <td>5</td>
                 <td>Muhammad Januar</td>
                 <td>januaricks@gmail.com</td>
-                <td>Master Degree</td>
-                <td>Engineer</td>
+                <td>Marketing</td>
+                <td>Account Executive</td>
                 <td>
                   <div className="d-flex gap-2">
                     <Button size="sm" variant="outline-primary">

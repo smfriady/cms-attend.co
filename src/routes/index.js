@@ -4,6 +4,7 @@ import SidebarLayout from "../layouts/SidebarLayout";
 import Dashboard from "../views/Dashboard";
 import Employees from "../views/Employees";
 import FormEmployee from "../views/FormEmployee";
+import Attendance from "../views/Attendance";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/add-employee",
         element: <FormEmployee />,
+      },
+      {
+        path: "/attendance",
+        element: <Attendance />,
       },
     ],
   },
