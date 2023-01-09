@@ -1,33 +1,31 @@
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { Form, Button } from "react-bootstrap";
-import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { fetchDepartments } from "../store/actions/actionDepartments";
 import { fetchRoles } from "../store/actions/actionRoles";
-import { createEmployees } from "../store/actions/actionEmployees";
+import {
+  detailEmployee,
+  updateEmployee,
+} from "../store/actions/actionEmployees";
+import { Form, Button } from "react-bootstrap";
 
-const FormEmployee = () => {
+const EditEmployee = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [inputValue, setInputValue] = useState({
-    first_name: "",
-    last_name: "",
-    email: "",
-    password: "",
-    nik: "",
-    education: "",
-    department_id: 0,
-    role_id: 0,
-    base_salary: 0,
-    birth_date: "",
-    img_profile: "",
-  });
+  const { id } = useParams();
 
   const departments = useSelector(
     (state) => state.departmentReducer.departments
   );
   const roles = useSelector((state) => state.roleReducer.roles);
+  const employee = useSelector((state) => state.employeesReducer.employee);
+
+  const [inputValue, setInputValue] = useState({
+    email: employee.email,
+    img_profile: employee.img_profile,
+  });
+  console.log("inputValue", inputValue);
 
   const handleChange = (e) => {
     let newInput = { ...inputValue, [e.target.name]: e.target.value };
@@ -35,13 +33,19 @@ const FormEmployee = () => {
   };
 
   const handleFiles = (e) => {
-    let newInput = { ...inputValue, img_profile: e.target.files[0] };
-    setInputValue(newInput);
+    const file = e.target.files[0];
+    if (file) {
+      let newInput = { ...inputValue, img_profile: file };
+      setInputValue(newInput);
+    } else {
+      let newInput = { ...inputValue, img_profile: employee.img_profile };
+      setInputValue(newInput);
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createEmployees(inputValue))
+    dispatch(updateEmployee(inputValue, id))
       .then(() => navigate("/employees"))
       .catch((err) => console.log(err));
   };
@@ -49,12 +53,13 @@ const FormEmployee = () => {
   useEffect(() => {
     dispatch(fetchDepartments());
     dispatch(fetchRoles());
-  }, [dispatch]);
+    dispatch(detailEmployee(id));
+  }, [dispatch, id]);
 
   return (
     <>
       <div className="content">
-        <h2>Form Add Employee</h2>
+        <h2>Form Update Employee</h2>
         <hr />
         <div className="pt-4">
           <Form onSubmit={handleSubmit}>
@@ -64,8 +69,9 @@ const FormEmployee = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter First Name"
-                  onChange={handleChange}
                   name="first_name"
+                  onChange={handleChange}
+                  defaultValue={employee.first_name}
                   required
                 />
               </Form.Group>
@@ -74,8 +80,9 @@ const FormEmployee = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter Last Name"
-                  onChange={handleChange}
                   name="last_name"
+                  onChange={handleChange}
+                  defaultValue={employee.last_name}
                   required
                 />
               </Form.Group>
@@ -86,18 +93,20 @@ const FormEmployee = () => {
                 <Form.Control
                   type="email"
                   placeholder="Enter email"
-                  onChange={handleChange}
                   name="email"
+                  onChange={handleChange}
+                  defaultValue={employee.email}
                   required
                 />
               </Form.Group>
               <Form.Group className="mb-3" style={{ width: 520 }}>
-                <Form.Label>Password</Form.Label>
+                <Form.Label>Birth Date</Form.Label>
                 <Form.Control
-                  type="password"
-                  placeholder="Enter password"
+                  type="date"
+                  placeholder="Enter Birthdate"
+                  name="birth_date"
                   onChange={handleChange}
-                  name="password"
+                  defaultValue={employee?.birth_date?.slice(0, 10)}
                   required
                 />
               </Form.Group>
@@ -108,8 +117,9 @@ const FormEmployee = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter NIK number"
-                  onChange={handleChange}
                   name="nik"
+                  onChange={handleChange}
+                  defaultValue={employee.nik}
                   required
                 />
               </Form.Group>
@@ -118,8 +128,9 @@ const FormEmployee = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter Education"
-                  onChange={handleChange}
                   name="education"
+                  onChange={handleChange}
+                  defaultValue={employee.education}
                   required
                 />
               </Form.Group>
@@ -128,7 +139,11 @@ const FormEmployee = () => {
               <div>
                 <Form.Group className="mb-3" style={{ width: 520 }}>
                   <Form.Label>Department</Form.Label>
-                  <Form.Select onChange={handleChange} name="department_id">
+                  <Form.Select
+                    onChange={handleChange}
+                    name="department_id"
+                    defaultValue={employee?.Department?.id}
+                  >
                     <option selected disabled>
                       Select Department
                     </option>
@@ -145,7 +160,11 @@ const FormEmployee = () => {
               <div>
                 <Form.Group className="mb-3" style={{ width: 520 }}>
                   <Form.Label>Role</Form.Label>
-                  <Form.Select onChange={handleChange} name="role_id">
+                  <Form.Select
+                    onChange={handleChange}
+                    name="role_id"
+                    defaultValue={employee?.Role?.id}
+                  >
                     <option selected disabled>
                       Select Role
                     </option>
@@ -161,38 +180,31 @@ const FormEmployee = () => {
               </div>
             </div>
             <div className="d-flex justify-content-between px-5">
-              <Form.Group className="mb-3" style={{ width: 332 }}>
+              <Form.Group className="mb-3" style={{ width: 520 }}>
                 <Form.Label>Base Salary</Form.Label>
                 <Form.Control
                   type="number"
                   placeholder="In Rupiah"
-                  onChange={handleChange}
                   name="base_salary"
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" style={{ width: 332 }}>
-                <Form.Label>Birth Date</Form.Label>
-                <Form.Control
-                  type="date"
-                  placeholder="Enter Birthdate"
                   onChange={handleChange}
-                  name="birth_date"
+                  defaultValue={employee.base_salary}
                   required
                 />
               </Form.Group>
-              <Form.Group className="mb-3" style={{ width: 332 }}>
+
+              <Form.Group className="mb-3" style={{ width: 520 }}>
                 <Form.Label>Upload Image</Form.Label>
                 <Form.Control
                   type="file"
                   onChange={handleFiles}
                   name="img_profile"
+                  required
                 />
               </Form.Group>
             </div>
             <div className="d-flex gap-2 justify-content-end px-5 py-2">
               <Button variant="primary" type="submit">
-                Add Employee
+                Update
               </Button>
               <Link to="/employees">
                 <Button variant="secondary" type="button">
@@ -206,4 +218,5 @@ const FormEmployee = () => {
     </>
   );
 };
-export default FormEmployee;
+
+export default EditEmployee;

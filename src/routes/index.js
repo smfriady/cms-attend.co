@@ -5,6 +5,7 @@ import Dashboard from "../views/Dashboard";
 import Employees from "../views/Employees";
 import FormEmployee from "../views/FormEmployee";
 import Attendance from "../views/Attendance";
+import EditEmployee from "../views/EditEmployee";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/attendance",
         element: <Attendance />,
+      },
+      {
+        path: "/edit-employee/:id",
+        element: <EditEmployee />,
       },
     ],
   },

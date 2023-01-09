@@ -1,7 +1,16 @@
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Chart from "../components/Chart";
 import Cards from "../components/Cards";
 import profileIcon from "../assets/janu.png";
+import { fetchEmployees } from "../store/actions/actionEmployees";
 const Homepage = () => {
+  const dispatch = useDispatch();
+  const employees = useSelector((state) => state.employeesReducer.employees);
+
+  useEffect(() => {
+    dispatch(fetchEmployees());
+  }, [dispatch]);
   return (
     <>
       <div className="content">
@@ -25,7 +34,7 @@ const Homepage = () => {
         </div>
         <hr />
         <div className="py-2" style={{ marginLeft: 24 }}>
-          <Cards />
+          <Cards employees={employees} />
         </div>
         <div className="py-2">
           <h3>Information of Attendance</h3>

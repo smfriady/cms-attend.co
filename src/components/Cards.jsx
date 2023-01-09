@@ -7,12 +7,12 @@ import {
 } from "react-bootstrap-icons";
 import { currencyFormatter } from "../tools/formatCurrency";
 
-const Cards = () => {
+const Cards = ({ employees }) => {
   const data = [
     {
       title: "Total Employees",
       icon: <PeopleFill />,
-      value: 35,
+      value: employees.total,
     },
     {
       title: "Total Attendance",
