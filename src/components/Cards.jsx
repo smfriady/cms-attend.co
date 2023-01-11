@@ -1,33 +1,12 @@
 import { Card } from "react-bootstrap";
-import {
-  PeopleFill,
-  CalendarCheckFill,
-  PinAngleFill,
-  CreditCardFill,
-} from "react-bootstrap-icons";
-import { currencyFormatter } from "../tools/formatCurrency";
+import { PeopleFill } from "react-bootstrap-icons";
 
-const Cards = ({ employees }) => {
+const Cards = ({ totalEmployee }) => {
   const data = [
     {
       title: "Total Employees",
       icon: <PeopleFill />,
-      value: employees.total,
-    },
-    {
-      title: "Total Attendance",
-      icon: <CalendarCheckFill />,
-      value: 32,
-    },
-    {
-      title: "Total Permission",
-      icon: <PinAngleFill />,
-      value: 10,
-    },
-    {
-      title: "Total Salary Payment",
-      icon: <CreditCardFill />,
-      value: currencyFormatter.format(123872000).replace(/\.00$/, ""),
+      value: totalEmployee,
     },
   ];
   return (
