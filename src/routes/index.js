@@ -1,11 +1,11 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
-import Login from "../views/Login";
+
 import SidebarLayout from "../layouts/SidebarLayout";
 import Dashboard from "../views/Dashboard";
 import Employees from "../views/Employees";
-import FormEmployee from "../views/FormEmployee";
+import Login from "../views/Login";
 import Attendance from "../views/Attendance";
-import EditEmployee from "../views/EditEmployee";
+import SalariesView from "../views/Salaries";
 
 const router = createBrowserRouter([
   {
@@ -22,24 +22,16 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: "/dashboard",
-        element: <Dashboard />,
-      },
-      {
         path: "/employees",
         element: <Employees />,
-      },
-      {
-        path: "/add-employee",
-        element: <FormEmployee />,
       },
       {
         path: "/attendance",
         element: <Attendance />,
       },
       {
-        path: "/edit-employee/:id",
-        element: <EditEmployee />,
+        path: "/salaries",
+        element: <SalariesView />,
       },
     ],
   },
